@@ -6,10 +6,12 @@ namespace IntroduccionDesignPatterns
     {
         static void Main(string[] args)
         {
-            Person miguel = new Person("Miguel", 21, "Mx");
-            Person pancho = new Person("Francisco", 21, "Mx");
+            var miguel = new SportyPerson("Miguel", 21, "mexicano");
+            var pancho = new SportyPerson("Francisco", 21, "mexicano");
             Console.WriteLine(miguel.Show());
             Console.WriteLine(pancho.Show());
+
+            miguel.Run();
         }
     }
 
@@ -29,6 +31,19 @@ namespace IntroduccionDesignPatterns
         public string Show()
         {
             return name + " " + age + " " + nationality;
+        }
+    }
+
+    class SportyPerson : Person
+    {
+        public SportyPerson(string name_, int age_, string nationality_) : base(name_, age_, nationality_ )
+        {
+
+        }
+
+        public void Run()
+        {
+            Console.WriteLine(name + " esta corriendo");
         }
     }
 }
