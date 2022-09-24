@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Tools")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Siemens AG")]
+[assembly: AssemblyCompany("Miguel Ruiz")]
 [assembly: AssemblyProduct("Tools")]
-[assembly: AssemblyCopyright("Copyright © Siemens AG 2022")]
+[assembly: AssemblyCopyright("Copyright © Miguel Ruiz 2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
