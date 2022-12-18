@@ -41,6 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Earn\EarnFactory.cs" />
+    <Compile Include="Earn\ForeignEarn.cs" />
+    <Compile Include="Earn\ForeignEarnFactory.cs" />
+    <Compile Include="Earn\IEarn.cs" />
+    <Compile Include="Earn\LocalEarn.cs" />
+    <Compile Include="Earn\LocalEarnFactory.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
