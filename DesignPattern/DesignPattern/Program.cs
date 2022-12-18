@@ -1,4 +1,5 @@
-﻿using DesignPattern.FactoryPattern;
+﻿using DesignPattern.DependencyInjectionPattern;
+using DesignPattern.FactoryPattern;
 using System;
 
 namespace DesignPattern
@@ -7,19 +8,33 @@ namespace DesignPattern
     {
         static void Main(string[] args)
         {
+
+            /*
+             *  Dependency Injection
+             */
+            // Tu clase no debería depender de cómo crear las cosas y simplemente recibir las cosas ya hechas.
+            // Haces el objeto de cerveza.
+            // Esta responsabilidad va a estar fuera de la clase DrinkWithBeer o bebida con cerveza.
+            // Este objeto de cerveza se lo mandas donde tiene que ir.
+
+            var beer = new Beer("Pikantus", "Erdinger");
+            DrinkWithBeer drinkWithBeer = new DrinkWithBeer(10, 1, beer);
+            drinkWithBeer.Build();
+
+
             /*
              * Factory Method
              */
 
             // no puedes crear un objeto de una clase abstracta pero si puedes crearlo de sus jerarquías o sea sus hijos.
-            SaleFactory storeSaleFactory = new StoreSaleFactory(10);
-            SaleFactory internetSaleFactory = new StoreSaleFactory(2);
+            //SaleFactory storeSaleFactory = new StoreSaleFactory(10);
+            //SaleFactory internetSaleFactory = new StoreSaleFactory(2);
 
-            ISale sale1 = storeSaleFactory.GetSale();
-            sale1.Sell(15);
+            //ISale sale1 = storeSaleFactory.GetSale();
+            //sale1.Sell(15);
 
-            ISale sale2 = internetSaleFactory.GetSale();
-            sale2.Sell(15);
+            //ISale sale2 = internetSaleFactory.GetSale();
+            //sale2.Sell(15);
 
 
             /*
@@ -29,7 +44,7 @@ namespace DesignPattern
             //var log = Singleton.Log.Instance; // se obtiene el objeto
             //log.Save("a");
             //log.Save("b");
-            
+
             //// El objeto es el mismo en toda la aplicación
             //var a = Singleton.Singleton.Instance;
             //var b = Singleton.Singleton.Instance;
