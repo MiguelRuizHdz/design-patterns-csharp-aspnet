@@ -1,6 +1,5 @@
-﻿using DesignPattern.DependencyInjectionPattern;
-using DesignPattern.FactoryPattern;
-using DesignPattern.Models;
+﻿using DesignPattern.Models;
+using DesignPattern.RepositoryPattern;
 using System;
 using System.Linq;
 
@@ -14,11 +13,24 @@ namespace DesignPattern
 
             using (var context = new DesignPatternsContext())
             {
-                var lst = context.Beers.ToList();
-                foreach (var beer in lst)
+                var beerRepository = new BeerRepository(context);
+                var beer = new Beer();
+                beer.Name = "Corona";
+                beer.Style = "Pilsner";
+
+                beerRepository.Add(beer);
+                beerRepository.Save();
+
+                foreach (var b in beerRepository.Get())
                 {
-                    Console.WriteLine(beer.Name);
+                    Console.WriteLine(b.Name);
                 }
+
+                //var lst = context.Beers.ToList();
+                //foreach (var beer in lst)
+                //{
+                //    Console.WriteLine(beer.Name);
+                //}
             }
 
 
