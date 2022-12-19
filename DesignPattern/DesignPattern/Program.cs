@@ -1,6 +1,8 @@
 ﻿using DesignPattern.DependencyInjectionPattern;
 using DesignPattern.FactoryPattern;
+using DesignPattern.Models;
 using System;
+using System.Linq;
 
 namespace DesignPattern
 {
@@ -8,6 +10,18 @@ namespace DesignPattern
     {
         static void Main(string[] args)
         {
+
+
+            using (var context = new DesignPatternsContext())
+            {
+                var lst = context.Beers.ToList();
+                foreach (var beer in lst)
+                {
+                    Console.WriteLine(beer.Name);
+                }
+            }
+
+
 
             /*
              *  Dependency Injection
@@ -17,9 +31,9 @@ namespace DesignPattern
             // Esta responsabilidad va a estar fuera de la clase DrinkWithBeer o bebida con cerveza.
             // Este objeto de cerveza se lo mandas donde tiene que ir.
 
-            var beer = new Beer("Pikantus", "Erdinger");
-            DrinkWithBeer drinkWithBeer = new DrinkWithBeer(10, 1, beer);
-            drinkWithBeer.Build();
+            //var beer = new Beer("Pikantus", "Erdinger");
+            //DrinkWithBeer drinkWithBeer = new DrinkWithBeer(10, 1, beer);
+            //drinkWithBeer.Build();
 
 
             /*
