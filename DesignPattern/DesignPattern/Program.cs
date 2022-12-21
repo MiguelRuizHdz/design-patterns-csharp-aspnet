@@ -1,5 +1,6 @@
 ﻿using DesignPattern.Models;
 using DesignPattern.RepositoryPattern;
+using DesignPattern.UnitOfWorkPattern;
 using System;
 using System.Linq;
 
@@ -9,49 +10,71 @@ namespace DesignPattern
     {
         static void Main(string[] args)
         {
-
-
             using (var context = new DesignPatternsContext())
             {
-
-                var beerRepository = new Repository<Beer>(context);
-                //var beer = new Beer() { Name = "Fuller", Style = "Strong Ale"};
-                //beerRepository.Add(beer);
-                beerRepository.Delete(4);
-                beerRepository.Save();
-
-
-                //var beerRepository = new BeerRepository(context);
-                //var beer = new Beer();
-                //beer.Name = "Corona";
-                //beer.Style = "Pilsner";
-
-                //beerRepository.Add(beer);
-                //beerRepository.Save();
-
-                foreach (var b in beerRepository.Get())
+                var unitOfWork = new UnitOfWork(context);
+                var beers = unitOfWork.Beers;
+                var beer = new Beer()
                 {
-                    Console.WriteLine($"{b.BeerId} {b.Name}");
-                }
+                    Name = "Fuller",
+                    Style = "Porter"
+                };
 
-                var brandRepository = new Repository<Brand>(context);
+                beers.Add(beer);
 
-                var brand = new Brand();
-                brand.Name = "Fuller";
-                brandRepository.Add(brand);
-                brandRepository.Save();
 
-                foreach (var br in brandRepository.Get())
+                var brands = unitOfWork.Brands;
+                var brand = new Brand()
                 {
-                    Console.WriteLine(br.Name);
-                }
+                    Name = "Fuller"
+                };
 
-                //var lst = context.Beers.ToList();
-                //foreach (var beer in lst)
-                //{
-                //    Console.WriteLine(beer.Name);
-                //}
+                brands.Add(brand);
+
+                unitOfWork.Save();
             }
+
+            //using (var context = new DesignPatternsContext())
+            //{
+
+            //    var beerRepository = new Repository<Beer>(context);
+            //    //var beer = new Beer() { Name = "Fuller", Style = "Strong Ale"};
+            //    //beerRepository.Add(beer);
+            //    beerRepository.Delete(4);
+            //    beerRepository.Save();
+
+
+            //    //var beerRepository = new BeerRepository(context);
+            //    //var beer = new Beer();
+            //    //beer.Name = "Corona";
+            //    //beer.Style = "Pilsner";
+
+            //    //beerRepository.Add(beer);
+            //    //beerRepository.Save();
+
+            //    foreach (var b in beerRepository.Get())
+            //    {
+            //        Console.WriteLine($"{b.BeerId} {b.Name}");
+            //    }
+
+            //    var brandRepository = new Repository<Brand>(context);
+
+            //    var brand = new Brand();
+            //    brand.Name = "Fuller";
+            //    brandRepository.Add(brand);
+            //    brandRepository.Save();
+
+            //    foreach (var br in brandRepository.Get())
+            //    {
+            //        Console.WriteLine(br.Name);
+            //    }
+
+            //    //var lst = context.Beers.ToList();
+            //    //foreach (var beer in lst)
+            //    //{
+            //    //    Console.WriteLine(beer.Name);
+            //    //}
+            //}
 
 
 
