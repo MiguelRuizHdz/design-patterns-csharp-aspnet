@@ -1,5 +1,6 @@
 ﻿using DesignPattern.Models;
 using DesignPattern.RepositoryPattern;
+using DesignPattern.StrategyPattern;
 using DesignPattern.UnitOfWorkPattern;
 using System;
 using System.Linq;
@@ -10,29 +11,37 @@ namespace DesignPattern
     {
         static void Main(string[] args)
         {
-            using (var context = new DesignPatternsContext())
-            {
-                var unitOfWork = new UnitOfWork(context);
-                var beers = unitOfWork.Beers;
-                var beer = new Beer()
-                {
-                    Name = "Fuller",
-                    Style = "Porter"
-                };
+            var context = new Context(new CarStrategy());
 
-                beers.Add(beer);
+            context.Run();
+            context.Strategy = new MotoStrategy();
+            context.Run();
+            context.Strategy = new BicycleStrategy();
+            context.Run();
+
+            //using (var context = new DesignPatternsContext())
+            //{
+            //    var unitOfWork = new UnitOfWork(context);
+            //    var beers = unitOfWork.Beers;
+            //    var beer = new Beer()
+            //    {
+            //        Name = "Fuller",
+            //        Style = "Porter"
+            //    };
+
+            //    beers.Add(beer);
 
 
-                var brands = unitOfWork.Brands;
-                var brand = new Brand()
-                {
-                    Name = "Fuller"
-                };
+            //    var brands = unitOfWork.Brands;
+            //    var brand = new Brand()
+            //    {
+            //        Name = "Fuller"
+            //    };
 
-                brands.Add(brand);
+            //    brands.Add(brand);
 
-                unitOfWork.Save();
-            }
+            //    unitOfWork.Save();
+            //}
 
             //using (var context = new DesignPatternsContext())
             //{
