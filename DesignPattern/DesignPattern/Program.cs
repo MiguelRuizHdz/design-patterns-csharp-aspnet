@@ -1,8 +1,10 @@
-﻿using DesignPattern.Models;
+﻿using DesignPattern.BuilderPattern;
+using DesignPattern.Models;
 using DesignPattern.RepositoryPattern;
 using DesignPattern.StrategyPattern;
 using DesignPattern.UnitOfWorkPattern;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace DesignPattern
@@ -11,13 +13,24 @@ namespace DesignPattern
     {
         static void Main(string[] args)
         {
-            var context = new Context(new CarStrategy());
 
-            context.Run();
-            context.Strategy = new MotoStrategy();
-            context.Run();
-            context.Strategy = new BicycleStrategy();
-            context.Run();
+            var builder = new PreparedAlcoholicDrinkConcreteBuilder();
+            var barmanDirector = new BarmanDirector(builder);
+
+            barmanDirector.PreparePiñaColada();
+
+            var preparedDrink = builder.GetPreparedDrink();
+            Console.WriteLine(preparedDrink.Result);
+
+            //var context = new Context(new CarStrategy());
+
+            //context.Run();
+            //context.Strategy = new MotoStrategy();
+            //context.Run();
+            //context.Strategy = new BicycleStrategy();
+            //context.Run();
+
+
 
             //using (var context = new DesignPatternsContext())
             //{
