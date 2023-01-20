@@ -1,6 +1,7 @@
 ﻿using DesignPattern.BuilderPattern;
 using DesignPattern.Models;
 using DesignPattern.RepositoryPattern;
+using DesignPattern.StatePattern;
 using DesignPattern.StrategyPattern;
 using DesignPattern.UnitOfWorkPattern;
 using System;
@@ -14,13 +15,34 @@ namespace DesignPattern
         static void Main(string[] args)
         {
 
-            var builder = new PreparedAlcoholicDrinkConcreteBuilder();
-            var barmanDirector = new BarmanDirector(builder);
+            var customerContext = new CustomerContext();
+            Console.WriteLine(customerContext.GetState());
+            customerContext.Request(100);
+            Console.WriteLine(customerContext.GetState());
 
-            barmanDirector.PreparePiñaColada();
+            customerContext.Request(50);
+            Console.WriteLine(customerContext.GetState());
+            
+            customerContext.Request(100);
+            Console.WriteLine(customerContext.GetState());
 
-            var preparedDrink = builder.GetPreparedDrink();
-            Console.WriteLine(preparedDrink.Result);
+            customerContext.Request(50);
+            Console.WriteLine(customerContext.GetState());
+
+            customerContext.Request(50);
+            Console.WriteLine(customerContext.GetState());
+
+
+            //var builder = new PreparedAlcoholicDrinkConcreteBuilder();
+            //var barmanDirector = new BarmanDirector(builder);
+
+            //barmanDirector.PreparePiñaColada();
+
+            //var preparedDrink = builder.GetPreparedDrink();
+            //Console.WriteLine(preparedDrink.Result);
+
+
+
 
             //var context = new Context(new CarStrategy());
 
