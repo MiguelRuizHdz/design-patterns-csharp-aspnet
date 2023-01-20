@@ -30,13 +30,13 @@ namespace DesignPatternsAsp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            // inyección 
+            // inyecciÃ³n 
             services.Configure<MyConfig>(Configuration.GetSection("MyConfig"));
             // Hay otra forma de inyectarlo de forma transitoria o Transient que esto va a ser un objeto para cada servicio,
-            // cada solicitud, cada controlador va a tener un objeto, es decir, en el objeto que esté utilizando en el controlador, en un constructor.
-            // No es el mismo objeto que esté utilizando en otro constructor.
-            // Si tú haces referencia al objeto dos tres veces en el mismo controlador, van a ser objetos diferentes.
-            // A diferencia de Singleton, si lo inyectamos de forma singleton, sí sería el mismo objeto.
+            // cada solicitud, cada controlador va a tener un objeto, es decir, en el objeto que estÃ© utilizando en el controlador, en un constructor.
+            // No es el mismo objeto que estÃ© utilizando en otro constructor.
+            // Si tÃº haces referencia al objeto dos tres veces en el mismo controlador, van a ser objetos diferentes.
+            // A diferencia de Singleton, si lo inyectamos de forma singleton, sÃ­ serÃ­a el mismo objeto.
             services.AddTransient( (factory) =>
             {
                 return new LocalEarnFactory(Configuration.GetSection("MyConfig").GetValue<decimal>("LocalPercentage"));
@@ -57,7 +57,7 @@ namespace DesignPatternsAsp
 
             // Scoped: un objeto por solicitud
             // El controlador va a tener el mismo elemento.
-            // A pesar de que lo puedas obtener varias veces en la misma transacción. Va a ser el mismo objeto.
+            // A pesar de que lo puedas obtener varias veces en la misma transacciÃ³n. Va a ser el mismo objeto.
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
